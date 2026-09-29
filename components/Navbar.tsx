@@ -1,38 +1,83 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { Menu, Search } from 'lucide-react'
 
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
   return (
-    <header className='w-full bg-white border-b border-gray-100 py-4 px-6 md:px-16 flex items-center justify-between sticky top-0 z-50'>
-
-      <Link href="/" className='flex items-center gap-2'>
-        <div className='bg-blue-600 text-white font-black px-2.5 py-1 rounded text-lg tracking-wider'>
+    <nav className='w-full bg-white border-b border-gray-100 sticky top-0 z-50'>
+      <div className='max-w-7xl mx-auto px-6 md:px-16 h-20 flex items-center justify-between'>
+        
+   
+        <Link href="/" className='bg-blue-600 text-white font-extrabold text-lg px-3 py-1.5 rounded-lg tracking-wider'>
           TTRidz
-        </div>
-      </Link>
+        </Link>
 
-      <nav className='hidden md:flex items-center gap-8 text-sm font-medium text-gray-600'>
-        <Link href="/browse" className='hover:text-blue-600 transition-colors'>Browse Cars</Link>
-        <Link href="/sell" className='hover:text-blue-600 transition-colors'>Sell Your Car</Link>
-        <Link href="/about" className='hover:text-blue-600 transition-colors'>About</Link>
-        <Link href="/help" className='hover:text-blue-600 transition-colors'>Help</Link>
-      </nav>
+        <div className='hidden md:flex items-center gap-8 text-sm text-gray-600 font-medium'>
+          <Link href="/browse" className='hover:text-blue-600 transition-colors'>Browse Cars</Link>
+          <Link href="/sell" className='hover:text-blue-600 transition-colors'>Sell Your Car</Link>
+          <Link href="/about" className='hover:text-blue-600 transition-colors'>About</Link>
+          <Link href="/help" className='hover:text-blue-600 transition-colors'>Help</Link>
+        </div>
+
+        <div className='flex items-center gap-4'>
+          <Link href="/search" className='hidden md:flex items-center gap-2 text-xs text-blue-600 bg-white border border-blue-600 px-3 py-2 rounded-lg hover:border-gray-300'>
+            <span>Search Listings</span>
+      
+          </Link>
 
     
-      <div className='flex items-center gap-4'>
-        <Link 
-          href="/search" 
-          className='hidden sm:flex items-center gap-2 text-xs font-semibold bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-sm'
-        >
-          <Search size={14} />
-          Search Listings 
-        </Link>
-        <button className='md:hidden text-gray-700'>
-          <Menu size={24} />
-        </button>
+          <button 
+            onClick={() => setIsOpen(!isOpen)}
+            className='md:hidden text-gray-600 focus:outline-none p-2 rounded-lg hover:bg-gray-50'
+            aria-label="Toggle Menu"
+          >
+            <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              {isOpen ? (
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M6 18L18 6M6 6l12 12' />
+              ) : (
+                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth='2' d='M4 6h16M4 12h16M4 18h16' />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
-    </header>
+
+      {isOpen && (
+        <div className='md:hidden bg-white border-b border-gray-200 px-6 py-4 flex flex-col gap-4 shadow-lg animate-fadeIn'>
+          <Link 
+            href="/browse" 
+            onClick={() => setIsOpen(false)}
+            className='text-sm font-medium text-gray-700 hover:text-blue-600 py-2 border-b border-gray-50'
+          >
+            Browse Cars
+          </Link>
+          <Link 
+            href="/sell" 
+            onClick={() => setIsOpen(false)}
+            className='text-sm font-medium text-gray-700 hover:text-blue-600 py-2 border-b border-gray-50'
+          >
+            Sell Your Car
+          </Link>
+          <Link 
+            href="/about" 
+            onClick={() => setIsOpen(false)}
+            className='text-sm font-medium text-gray-700 hover:text-blue-600 py-2 border-b border-gray-50'
+          >
+            About
+          </Link>
+          <Link 
+            href="/help" 
+            onClick={() => setIsOpen(false)}
+            className='text-sm font-medium text-gray-700 hover:text-blue-600 py-2'
+          >
+            Help
+          </Link>
+        </div>
+      )}
+    </nav>
   )
 }
 
