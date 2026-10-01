@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const CtaFooter = () => {
   return (
-    <footer className='w-full bg-[ pt-8 pb-16 px-6 md:px-16'>
+    <footer className='w-full bg-white pt-8 pb-16 px-6 md:px-16'>
       <div className='max-w-7xl mx-auto flex flex-col items-center gap-8'>
     
         <div className='w-full bg-blue-600 rounded-3xl py-16 px-8 md:px-16 text-center flex flex-col items-center justify-center shadow-xl relative overflow-hidden'>
